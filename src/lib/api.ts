@@ -1,4 +1,11 @@
-export const API_BASE_URL = (import.meta.env?.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api').replace(/\/$/, '');
+let baseUrl = import.meta.env?.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api';
+if (baseUrl && !baseUrl.startsWith('http://') && !baseUrl.startsWith('https://')) {
+  baseUrl = `https://${baseUrl}`;
+}
+if (baseUrl && !baseUrl.endsWith('/api') && !baseUrl.endsWith('/api/')) {
+  baseUrl = `${baseUrl.replace(/\/$/, '')}/api`;
+}
+export const API_BASE_URL = baseUrl.replace(/\/$/, '');
 
 export interface ApiErrorPayload {
   detail?: string;
