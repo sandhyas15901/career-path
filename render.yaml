@@ -1,5 +1,5 @@
 services:
-  # Backend Django Web Service
+  # Backend Django Web Service (SQLite)
   - type: web
     name: careerpath-backend
     runtime: python
@@ -11,10 +11,6 @@ services:
         value: "False"
       - key: SECRET_KEY
         generateValue: true
-      - key: DATABASE_URL
-        fromDatabase:
-          name: careerpath-db
-          property: connectionString
       - key: ALLOWED_HOSTS
         value: .onrender.com
       - key: CORS_ALLOWED_ORIGINS
@@ -36,7 +32,3 @@ services:
           property: host
       - key: NODE_VERSION
         value: "20"
-
-databases:
-  - name: careerpath-db
-    plan: free

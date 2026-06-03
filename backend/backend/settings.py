@@ -92,10 +92,13 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
-        conn_max_age=600,
-        ssl_require=not DEBUG
+        conn_max_age=600
     )
 }
+
+if DATABASES['default']['ENGINE'] == 'django.db.backends.postgresql':
+    DATABASES['default']['OPTIONS'] = DATABASES['default'].get('OPTIONS', {})
+    DATABASES['default']['OPTIONS']['sslmode'] = 'require'
 
 
 # Password validation
