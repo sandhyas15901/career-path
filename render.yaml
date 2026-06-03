@@ -2,7 +2,7 @@ services:
   # Backend Django Web Service
   - type: web
     name: careerpath-backend
-    env: python
+    runtime: python
     rootDir: backend
     buildCommand: ./build.sh
     startCommand: gunicorn backend.wsgi:application
@@ -25,9 +25,9 @@ services:
   # Frontend Vite/React Static Site
   - type: web
     name: careerpath-frontend
-    env: static
+    runtime: static
     buildCommand: npm run build
-    publishDir: dist
+    staticPublishPath: dist
     envVars:
       - key: VITE_API_BASE_URL
         fromService:
